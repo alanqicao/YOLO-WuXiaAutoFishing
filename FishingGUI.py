@@ -109,27 +109,22 @@ def start_fishing_bot():
         log_message("🎣 Pressing F1 to start fishing...")
 
         start_time = time.time()
-        fish_on_hook_count = 0
         while running:
             if time.time() - start_time > 25:
                 log_message("⏳ No fish detected after 25 seconds! Restarting fishing...")
                 return start_fishing_bot()
             detected = detect_fishing_state()
             if detected and "Fish_OnHook" in detected:
-                fish_on_hook_count += 1
-                log_message(f"🐟 Fish_OnHook detected {fish_on_hook_count} times.")
-                if fish_on_hook_count >= 2:
+
                     time.sleep(0.3)
                     pyautogui.click()
                     pydirectinput.press("f")
                     log_message("✅ Reeling in fish!")
                     break
             time.sleep(0.2)
-        start_time = time.time()
+
         while running:
-            if time.time() - start_time > 16:
-                log_message("⏳ No fish detected after 16 seconds! Restarting fishing...")
-                return start_fishing_bot()
+
             detected = detect_fishing_state()
             if detected and "Perfect_Time" in detected:
                 log_message("🎯 Perfect timing detected! Pressing 'F'.")

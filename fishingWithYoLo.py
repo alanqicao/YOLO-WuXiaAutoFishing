@@ -113,7 +113,6 @@ def start_fishing_bot(first_run=True, delay_f1=False):
 
         # Detect "Fish_OnHook" (Timeout 25s)
         start_time = time.time()
-        fish_on_hook_count = 0  # Counter to confirm Fish_OnHook
         while True:
             # ⏳ Check if 25 seconds passed before detecting anything
             if time.time() - start_time > 26:
@@ -125,10 +124,6 @@ def start_fishing_bot(first_run=True, delay_f1=False):
                 continue
 
             if "Fish_OnHook" in detected:
-                fish_on_hook_count += 1
-                print(f"🐟 Fish_OnHook detected {fish_on_hook_count} times.")
-
-                if fish_on_hook_count >= 2:  # Confirm detection before proceeding
                     print("✅ Confirmed Fish_OnHook! Reeling in fish...")
                     time.sleep(0.5)
 
@@ -141,18 +136,10 @@ def start_fishing_bot(first_run=True, delay_f1=False):
                     print("✅ Pressed 'F' successfully!")
                     break  # Move to next stage
 
-            else:
-                fish_on_hook_count = 0  # Reset counter if Fish_OnHook is missing
-
             time.sleep(0.2)  # Wait before next detection
 
         # Detect "Perfect_Time"
-        while True:
-                        # ⏳ Check if 16 seconds passed before detecting anything
-            if time.time() - start_time > 16:
-                print("⏳ No confirmed Perfect_Time detected after 16 seconds! Restarting fishing...")
-                return start_fishing_bot(first_run=False, delay_f1=True)  # 🔄 Restart with 2s delay
-            
+        while True:           
             detected = detect_fishing_state()
             if detected is None:
                 continue
