@@ -47,10 +47,10 @@ To ensure all necessary packages are installed, follow these steps:
 ## 📂
 
 ## 🛠 Usage
-
 1. Clone or download the project folder.
 2. Place your `best.pt` file in the `models/` folder.
 3. Run the script:
+
 4. Switch to the game window within 10 seconds.
 
 ### Running from Source Code (Python)
@@ -59,7 +59,9 @@ To ensure all necessary packages are installed, follow these steps:
 2. Open a terminal in VS Code.
 3. Install dependencies using:
 4. Run the script:
-
+```bash
+   python FishingGUI.py
+```
 ## 📝 Instructions
 
 - Make sure the **Fishing Skill** is bound to **F1**.
