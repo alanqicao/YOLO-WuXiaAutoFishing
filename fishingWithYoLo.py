@@ -7,6 +7,20 @@ import numpy as np
 import win32gui, win32ui, win32con
 from ultralytics import YOLO  # Import YOLOv8 model
 import os
+import ctypes
+import sys
+
+# 检查是否以管理员权限运行
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
+# 如果没有管理员权限，则重新运行自己，并申请权限
+if not is_admin():
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+    sys.exit()
 
 # Define model path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
